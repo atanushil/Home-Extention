@@ -30,12 +30,12 @@ export default function TimeDate() {
   const amPm = fullTime.match(/(AM|PM)$/i);
 
   return (
-    <div className="w-full  bg-green-200 rounded-md p-2">
-      <p className="flex w-full items-end">
-        <span className="text-[3.6vw] w-11/12">{fullTime.replace(/(AM|PM)$/i, "")}</span>
-        <span className="text-[2.5vw] uppercase font-medium">{amPm ? amPm[0] : ""}</span>
+    <div className="w-full  bg-white/30 backdrop-blur-lg rounded-md p-2">
+      <p className="flex w-full items-end text-white">
+        <span className="text-[3.6vw] w-9/12">{fullTime.replace(/(AM|PM)$/i, "")}</span>
+        <span className="text-[2.5vw] mb-2 uppercase font-medium">{amPm ? amPm[0] : ""}</span>
       </p>
-      <p className="text-[2vw]">{formattedDate}</p>
+      <p className="text-[2vw] text-white">{formattedDate}</p>
     </div>
   );
 }
