@@ -1,0 +1,72 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+.gsc-input {
+  border: none;
+  outline: none;
+}
+
+.gsc-search-button {
+  display: none;
+}
+
+.gstl_50 .gssb_c {
+  /* background-color: red; */
+  border-radius: 999px;
+
+}
+
+.gsc-input-box {
+  border: none;
+  outline: none;
+
+  border-radius: 9999px;
+}
+
+input {
+  border: none;
+  outline-offset: none;
+  outline: none;
+}
+
+.gsc-input {
+
+  border: none;
+  outline: none;
+}
+
+.gsc-results-wrapper-overlay .gsc-results-wrapper-visible {
+  position: absolute;
+  background-color: red;
+  height: 40vh;
+  overflow: scroll;
+}
+
+.search-bar-container {
+  background-color: none;
+}
+
+#___gcse_0 :active{
+  background-color: none;
+  /* height: 40vh; */
+  /* overflow-y: scroll; */
+}
+
