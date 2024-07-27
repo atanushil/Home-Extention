@@ -34,7 +34,7 @@ export default function App() {
   ];
   const categories = ['sad']
   return (
-    <div className="w-full bg-slate-900/30 backdrop-blur-md h-[100vh] flex items-center ">
+    <div className="w-full backdrop-brightness-50 bg-white/30  h-[100vh] flex items-center ">
       <section className="max-w-[20vw] w-4/12 h-fit self-start max-h-fit  mx-8 my-4 flex flex-col gap-3 mt-8">
         <TimeDate />
         <Weather />

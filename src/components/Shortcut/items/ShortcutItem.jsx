@@ -43,7 +43,7 @@ export default function ShortcutItem({ faviconLink, name, link, onEdit, onRemove
   }, []);
 
   return (
-    <div className="relative w-28 h-28 px-1 py-2 rounded-lg backdrop-blur-sm bg-white/30 cursor-pointer group">
+    <div className="relative w-28 h-28 px-1 py-2 rounded-lg hover:backdrop-blur-sm   hover:bg-white/30 cursor-pointer group">
       <div className="absolute top-2 right-1 hidden group-hover:block">
         <BsThreeDotsVertical onClick={handleShowOption} />
       </div>

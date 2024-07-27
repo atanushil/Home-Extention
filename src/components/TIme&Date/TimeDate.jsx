@@ -32,10 +32,10 @@ export default function TimeDate() {
   return (
     <div className="w-full  bg-white/30 backdrop-blur-lg rounded-md p-2">
       <p className="flex w-full items-end text-white">
-        <span className="text-[3.6vw] w-9/12">{fullTime.replace(/(AM|PM)$/i, "")}</span>
-        <span className="text-[2.5vw] mb-2 uppercase font-medium">{amPm ? amPm[0] : ""}</span>
+        <span className="text-[3.6vw] md:text-[3.2vw] w-9/12">{fullTime.replace(/(AM|PM)$/i, "")}</span>
+        <span className="text-[2.5vw] mb-2 md:mb-1 uppercase font-medium">{amPm ? amPm[0] : ""}</span>
       </p>
-      <p className="text-[2vw] text-white">{formattedDate}</p>
+      <p className="text-[2vw]  text-white">{formattedDate}</p>
     </div>
   );
 }
