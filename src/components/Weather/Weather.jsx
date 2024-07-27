@@ -76,7 +76,7 @@ const Weather = React.memo(() => {
   }, []);
 
   return (
-    <div className="bg-gray-400 p-4 rounded-md max-w-sm shadow-lg">
+    <div className="bg-gray-400 p-4 rounded-md max-w-sm shadow-lg hidden lg:block">
       {error && <div className="text-red-600">{error}</div>}
       {weatherData && location ? (
         <div>
