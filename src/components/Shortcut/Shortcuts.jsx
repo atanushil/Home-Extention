@@ -27,6 +27,7 @@ export default function Shortcuts({ shortcuts, selectedCategory }) {
   const handleRemove = (name) => {
     deleteShortcut(selectedCategory, name);
     // Add logic to refresh the shortcut list if necessary
+    console.log("Category:",selectedCategory,":-->Shortcut:-->",name);
   };
 
   return (

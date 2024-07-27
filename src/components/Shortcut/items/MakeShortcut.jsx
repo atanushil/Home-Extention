@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { addShortcutToCategory, updateShortcut } from "../../../Data/LocalDataManager";
 
-export default function MakeShortcut({ onClose, editShortcut, selectedCategory, onShortcutChange }) {
+export default function MakeShortcut({ onClose, editShortcut, selectedCategory }) {
   const [name, setName] = useState(editShortcut ? editShortcut.name : "");
   const [link, setLink] = useState(editShortcut ? editShortcut.link : "");
 
@@ -15,12 +15,13 @@ export default function MakeShortcut({ onClose, editShortcut, selectedCategory, 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (editShortcut) {
+      // Update the existing shortcut
       updateShortcut(selectedCategory, editShortcut.name, { name, link });
     } else {
+      // Add a new shortcut
       addShortcutToCategory(selectedCategory, { name, link });
     }
-    onShortcutChange(); // Call the function to notify parent component
-    onClose();
+    onClose(); // Close the modal
   };
 
   return (

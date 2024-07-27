@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function Weather() {
+const Weather = React.memo(() => {
   const [weatherData, setWeatherData] = useState(null);
   const [location, setLocation] = useState(null);
   const [error, setError] = useState(null);
@@ -20,6 +20,7 @@ export default function Weather() {
       try {
         const response = await axios.get(weatherUrl, weatherOptions);
         setWeatherData(response.data);
+        localStorage.setItem('weatherData', JSON.stringify(response.data));
       } catch (error) {
         setError("Failed to fetch weather data");
         console.error(error);
@@ -32,6 +33,7 @@ export default function Weather() {
       try {
         const response = await axios.get(locationUrl);
         setLocation(response.data.address);
+        localStorage.setItem('location', JSON.stringify(response.data.address));
       } catch (error) {
         setError("Failed to fetch location name");
         console.error(error);
@@ -43,8 +45,18 @@ export default function Weather() {
         navigator.geolocation.getCurrentPosition(
           (position) => {
             const { latitude, longitude } = position.coords;
-            fetchWeather(latitude, longitude);
-            fetchLocationName(latitude, longitude);
+
+            // Check if weather data is already cached
+            const cachedWeather = localStorage.getItem('weatherData');
+            const cachedLocation = localStorage.getItem('location');
+
+            if (cachedWeather && cachedLocation) {
+              setWeatherData(JSON.parse(cachedWeather));
+              setLocation(JSON.parse(cachedLocation));
+            } else {
+              fetchWeather(latitude, longitude);
+              fetchLocationName(latitude, longitude);
+            }
           },
           (error) => {
             setError("Failed to get location");
@@ -64,7 +76,6 @@ export default function Weather() {
       {error && <div>{error}</div>}
       {weatherData && location ? (
         <div>
-          {console.log(weatherData)}
           <h3>Weather in {location.city || location.town || location.village}</h3>
           <p>Temperature: {weatherData.temp}°C</p>
           <p>Condition: {weatherData.description}</p>
@@ -76,4 +87,6 @@ export default function Weather() {
       )}
     </div>
   );
-}
+});
+
+export default Weather;
