@@ -17,7 +17,7 @@ export default function SearchBar() {
   }, []);
 
   return (
-    <div>
+    <div className='w-full'>
       <div className="gcse-search" ></div>
     </div>
   );

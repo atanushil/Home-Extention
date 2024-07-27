@@ -58,13 +58,13 @@ export default function App() {
   }, [handleShortcutChange]);
 
   return (
-    <div className="w-full h-[100vh] flex backdrop-brightness-50 bg-white/30">
+    <div className="w-full h-[100vh] sm:flex-row flex flex-col items-center sm:items-stretch backdrop-brightness-50 bg-white/30">
       <section className="w-4/12 max-w-[20vw] h-fit mx-8 my-4 flex flex-col gap-3 mt-8">
-        <TimeDate />
+        <TimeDate  />
         {/* <Weather /> */}
         <Note />
       </section>
-      <main className="w-[70vw] max-h-[80vh] my-8">
+      <main className="w-[70vw] max-h-[80vh] my-0 sm:my-8">
         <div>
           <SearchBar />
         </div>
