@@ -39,33 +39,33 @@ export default function MakeShortcut({
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/50">
-      <div className="bg-white p-4 rounded shadow-lg w-80">
-        <h2 className="text-xl font-bold mb-4">
+    <div className="fixed inset-0 flex items-center justify-center backdrop-blur-sm bg-black/50">
+      <div className="bg-white/50 p-4 rounded shadow-lg lg:w-[30%] backdrop-blur-sm">
+        <h2 className="text-xl font-bold mb-4 text-white">
           {editShortcut ? "Edit Shortcut" : "Add Shortcut"}
         </h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-white uppercase">
               Name
             </label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm px-2"
               required
             />
           </div>
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">
-              Link
+            <label className="block text-sm font-medium text-white uppercase">
+              URL
             </label>
             <input
               type="url"
               value={link}
               onChange={(e) => setLink(e.target.value)}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm px-2"
               required
             />
           </div>
@@ -76,13 +76,13 @@ export default function MakeShortcut({
                 setEditShortcut(null); // Optional: Reset edit shortcut
                 setIsMakeShortcutOpen(false); // Close the modal
               }}
-              className="bg-gray-500 text-white px-4 py-2 rounded"
+              className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-[#d78376]"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="bg-blue-500 text-white px-4 py-2 rounded"
+              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
               disabled={!name || !link}
             >
               {editShortcut ? "Save Changes" : "Add Shortcut"}

@@ -58,7 +58,7 @@ export default function Categories({ onCategoryClick }) {
   const isMakeCategoryActive = isEditing || isAdding;
 
   return (
-    <div className="flex gap-2 items-center border-b-red-600 border-b-2">
+    <div className="flex gap-2  items-center border-b-red-600 border-b-2">
       <Items
         categories={categories}
         onEditCategory={onEditCategory}

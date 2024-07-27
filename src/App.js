@@ -59,12 +59,12 @@ export default function App() {
 
   return (
     <div className="w-full h-[100vh] sm:flex-row flex flex-col items-center sm:items-stretch backdrop-brightness-50 bg-white/30">
-      <section className="w-4/12 max-w-[20vw] h-fit mx-8 my-4 flex flex-col gap-3 mt-8">
+      <section className="w-10/12 lg:max-w-[20vw]  h-fit mx-8 my-4 flex flex-col gap-3 mt-8">
         <TimeDate  />
         {/* <Weather /> */}
         <Note />
       </section>
-      <main className="w-[70vw] max-h-[80vh] my-0 sm:my-8">
+      <main className="lg:w-[70vw] w-10/12 lg:max-h-[80vh] my-0 sm:my-8">
         <div>
           <SearchBar />
         </div>
