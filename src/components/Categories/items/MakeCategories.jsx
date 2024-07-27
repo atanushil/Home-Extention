@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
-import { IoMdClose } from "react-icons/io";
+import React, { useState, useEffect } from 'react';
+import { IoMdClose } from 'react-icons/io';
 
 export default function MakeCategories({ category, onSaveCategory, onClose }) {
   const [inputValue, setInputValue] = useState(category || '');
 
+  useEffect(() => {
+    setInputValue(category || '');
+  }, [category]);
+
   const handleSave = () => {
-    onSaveCategory(inputValue);
+    if (inputValue.trim()) {
+      onSaveCategory(inputValue);
+    }
   };
 
   const handleClear = () => {

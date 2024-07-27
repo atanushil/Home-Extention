@@ -20,7 +20,7 @@ export default function ShortcutItem({ faviconLink, name, link, onEdit, onRemove
     if (option === "Edit") {
       onEdit();
     } else if (option === "Remove") {
-      onRemove();
+      onRemove(name); // Pass the name to onRemove
     }
     setShowOptions(false); // Hide options after selection
   };
@@ -60,8 +60,8 @@ export default function ShortcutItem({ faviconLink, name, link, onEdit, onRemove
       <div className="flex flex-col items-center h-full justify-center">
         <div className="icon p-2 w-full flex justify-center h-12">
           {faviconError ? (
-            <div className="w-fit px-3 rounded-full h-full flex items-center justify-center bg-gray-200 text-gray-600 text-2xl font-bold"  onError={handleFaviconError}
-            onClick={handleClick}>
+            <div className="w-fit px-3 rounded-full h-full flex items-center justify-center bg-gray-200 text-gray-600 text-2xl font-bold"
+              onClick={handleClick}>
               {name.charAt(0)}
             </div>
           ) : (

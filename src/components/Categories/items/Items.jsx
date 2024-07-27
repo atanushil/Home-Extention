@@ -2,25 +2,34 @@ import React, { useState, useEffect } from "react";
 import { MdDeleteForever } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 
-export default function Items({
-  categories,
-  onEditCategory,
-  onDeleteCategory,
-}) {
-  const [selectedCategory, setSelectedCategory] = useState(null);
+export default function Items({ categories, onEditCategory, onDeleteCategory, onCategoryClick }) {
+  const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(null);
 
   useEffect(() => {
     let timer;
-    if (selectedCategory !== null) {
+    if (selectedCategoryIndex !== null) {
       timer = setTimeout(() => {
-        setSelectedCategory(null);
+        setSelectedCategoryIndex(null);
       }, 5000); // Hide icons after 5 seconds
     }
     return () => clearTimeout(timer);
-  }, [selectedCategory]);
+  }, [selectedCategoryIndex]);
 
   const handleClick = (index) => {
-    setSelectedCategory(index);
+    setSelectedCategoryIndex(index);
+    if (onCategoryClick) {
+      onCategoryClick(categories[index]); // Notify parent component about the clicked category
+    }
+  };
+
+  const handleEditClick = (e, category) => {
+    e.stopPropagation(); // Prevents triggering the category click event
+    onEditCategory(category);
+  };
+
+  const handleDeleteClick = (e, category) => {
+    e.stopPropagation(); // Prevents triggering the category click event
+    onDeleteCategory(category);
   };
 
   return (
@@ -32,18 +41,18 @@ export default function Items({
           onClick={() => handleClick(index)}
         >
           <div className="pr-2">{category}</div>
-          {selectedCategory === index && (
+          {selectedCategoryIndex === index && (
             <div className="flex items-center gap-1">
               <FaRegEdit
                 size={16}
                 color="white"
-                onClick={() => onEditCategory(category)}
+                onClick={(e) => handleEditClick(e, category)}
                 className="cursor-pointer"
               />
               <MdDeleteForever
                 size={18}
                 color="white"
-                onClick={() => onDeleteCategory(category)}
+                onClick={(e) => handleDeleteClick(e, category)}
                 className="cursor-pointer"
               />
             </div>

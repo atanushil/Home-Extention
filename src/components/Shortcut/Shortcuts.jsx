@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import ShortcutItem from "./items/ShortcutItem";
 import MakeShortcut from "./items/MakeShortcut";
 import AddShortcuts from "./items/AddShortcuts";
+import { deleteShortcut } from "../../Data/LocalDataManager";
 
-export default function Shortcuts({shortcuts}) {
+export default function Shortcuts({ shortcuts, selectedCategory }) {
   const [isMakeShortcutOpen, setIsMakeShortcutOpen] = useState(false);
   const [editShortcut, setEditShortcut] = useState(null);
 
@@ -14,7 +15,8 @@ export default function Shortcuts({shortcuts}) {
   };
 
   // Function to truncate long names
-  const truncateName = (name) => (name.length > 10 ? `${name.substring(0, 10)}...` : name);
+  const truncateName = (name) =>
+    name.length > 10 ? `${name.substring(0, 10)}...` : name;
 
   // Function to handle editing a shortcut
   const handleEditShortcut = (shortcut) => {
@@ -22,31 +24,45 @@ export default function Shortcuts({shortcuts}) {
     setIsMakeShortcutOpen(true);
   };
 
-  // Shortcuts array with base URLs
-  const onRemove=()=>{
-    alert("es")
-  }
+  const handleRemove = (name) => {
+    deleteShortcut(selectedCategory, name);
+    // Add logic to refresh the shortcut list if necessary
+  };
 
   return (
     <div className="p-4">
-      <div className="flex flex-wrap gap-2  max-h-fit justify-center overflow-y-auto h-fit">
-        {shortcuts.map((shortcut, index) => (
-          <div className="self-start justify-start place-self-start">
-          <ShortcutItem
-            onRemove={onRemove}
-            key={index}
-            faviconLink={getFaviconUrl(shortcut.link)}
-            name={truncateName(shortcut.name)}
-            link={shortcut.link}
-            onEdit={() => handleEditShortcut(shortcut)}
-          />
-          </div>
-        ))}
-        <AddShortcuts onClick={() => setIsMakeShortcutOpen(true)} name={"Add Shortcut"} />
+      <div className="flex flex-wrap gap-2 max-h-fit justify-center overflow-y-auto h-fit">
+        {shortcuts.map((shortcut, index) => {
+          const key = shortcut.id ? shortcut.id : `fallback-key-${index}`; // Fallback key if id is undefined
+
+          return (
+            <div
+              className="self-start justify-start place-self-start"
+              key={key}
+            >
+              <ShortcutItem
+                onRemove={() => handleRemove(shortcut.name)}
+                faviconLink={getFaviconUrl(shortcut.link)}
+                name={truncateName(shortcut.name)}
+                link={shortcut.link}
+                onEdit={() => handleEditShortcut(shortcut)}
+              />
+            </div>
+          );
+        })}
+        <AddShortcuts
+          onClick={() => setIsMakeShortcutOpen(true)}
+          name={"Add Shortcut"}
+        />
         {isMakeShortcutOpen && (
           <MakeShortcut
             onClose={() => setIsMakeShortcutOpen(false)}
             editShortcut={editShortcut}
+            selectedCategory={selectedCategory}
+            onShortcutChange={() => {
+              // Add logic to refresh the shortcut list if necessary
+              setIsMakeShortcutOpen(false);
+            }}
           />
         )}
       </div>

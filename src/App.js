@@ -1,54 +1,69 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Weather from "./components/Weather/Weather";
 import TimeDate from "./components/TIme&Date/TimeDate";
 import Note from "./components/Note/Note";
 import SearchBar from "./components/Search/SearchBar";
 import Categories from "./components/Categories/Categories";
 import Shortcuts from "./components/Shortcut/Shortcuts";
+import MakeShortcut from "./components/Shortcut/items/MakeShortcut";
+import { getShortcuts } from "./Data/LocalDataManager";
+
 export default function App() {
-  const shortcuts = [
-    { name: "Google", link: "https://www.google.com" },
-    { name: "Facebook", link: "https://www.facebook.com" },
-    { name: "Twitter", link: "https://www.twitter.com" },
-    { name: "Brew", link: "https://brew.sh" },
-    { name: "Vercel", link: "https://vercel.com/atanushils-projects" },
-    { name: "YouTube", link: "https://www.youtube.com/watch?v=2e47bA_Qqyw" },
-    { name: "GitHub", link: "https://github.com" },
-    { name: "LinkedIn", link: "https://www.linkedin.com" },
-    { name: "Stack Overflow", link: "https://stackoverflow.com" },
-    { name: "Reddit", link: "https://www.reddit.com" },
-    { name: "Amazon", link: "https://www.amazon.com" },
-    { name: "Netflix", link: "https://www.netflix.com" },
-    { name: "Hacker News", link: "https://news.ycombinator.com" },
-    { name: "Medium", link: "https://medium.com" },
-    { name: "Dev.to", link: "https://dev.to" },
-    { name: "MDN Web Docs", link: "https://developer.mozilla.org" },
-    { name: "W3Schools", link: "https://www.w3schools.com" },
-    { name: "freeCodeCamp", link: "https://www.freecodecamp.org" },
-    { name: "CodePen", link: "https://codepen.io" },
-    { name: "CSS-Tricks", link: "https://css-tricks.com" },
-    { name: "Smashing Magazine", link: "https://www.smashingmagazine.com" },
-    { name: "Coursera", link: "https://www.coursera.org" },
-    { name: "Udemy", link: "https://www.udemy.com" },
-    { name: "Khan Academy", link: "https://www.khanacademy.org" },
-  ];
-  const categories = ['sad']
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [shortcuts, setShortcuts] = useState([]);
+  const [showShortcutModal, setShowShortcutModal] = useState(false);
+  const [editShortcut, setEditShortcut] = useState(null);
+
+  const handleShortcutChange = () => {
+    if (selectedCategory) {
+      const fetchedShortcuts = getShortcuts(selectedCategory);
+      setShortcuts(fetchedShortcuts);
+      setEditShortcut(null);
+    }
+  };
+
+  useEffect(() => {
+    if (selectedCategory) {
+      const fetchedShortcuts = getShortcuts(selectedCategory);
+      setShortcuts(fetchedShortcuts);
+    } else {
+      setShortcuts([]);
+    }
+  }, [selectedCategory]);
+
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
+  };
+
   return (
-    <div className="w-full backdrop-brightness-50 bg-white/30  h-[100vh] flex items-center ">
-      <section className="max-w-[20vw] w-4/12 h-fit self-start max-h-fit  mx-8 my-4 flex flex-col gap-3 mt-8">
+    <div className="w-full h-[100vh] flex backdrop-brightness-50 bg-white/30">
+      <section className="w-4/12 max-w-[20vw] h-fit mx-8 my-4 flex flex-col gap-3 mt-8">
         <TimeDate />
-        <Weather />
+        <Weather/>
         <Note />
       </section>
-      <main className="self-start my-8  w-[70vw]   max-h-[80vh]">
+      <main className="w-[70vw] max-h-[80vh] my-8">
         <div>
           <SearchBar />
         </div>
         <div className="my-2 overflow-x-auto flex flex-col gap-2 scrollbar-hidden">
-          <Categories categories={categories} />
-          <Shortcuts shortcuts={shortcuts} />
+          <Categories onCategoryClick={handleCategoryClick} />
+          {selectedCategory && (
+            <Shortcuts
+              shortcuts={shortcuts}
+              selectedCategory={selectedCategory}
+            />
+          )}
         </div>
       </main>
+      {showShortcutModal && (
+        <MakeShortcut
+          onClose={() => setShowShortcutModal(false)}
+          editShortcut={editShortcut}
+          selectedCategory={selectedCategory}
+          onShortcutChange={handleShortcutChange}
+        />
+      )}
     </div>
   );
 }
