@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Weather from "./components/Weather/Weather";
 import TimeDate from "./components/TIme&Date/TimeDate";
 import Note from "./components/Note/Note";
@@ -35,17 +35,27 @@ export default function App() {
     setSelectedCategory(category);
   };
 
-  const handleShortcutChange = () => {
+  const handleShortcutChange = useCallback(() => {
     if (selectedCategory) {
       const fetchedShortcuts = getShortcuts(selectedCategory);
       setShortcuts(fetchedShortcuts);
     }
-  };
+  }, [selectedCategory]);
 
   const handleCloseModal = () => {
     setEditShortcut(null);
     setShowShortcutModal(false);
   };
+
+  useEffect(() => {
+    // Set up interval to refresh shortcuts every second
+    const intervalId = setInterval(() => {
+      handleShortcutChange();
+    }, 1000); // 1000 milliseconds = 1 second
+
+    // Clean up interval on component unmount
+    return () => clearInterval(intervalId);
+  }, [handleShortcutChange]); // Include handleShortcutChange as a dependency
 
   return (
     <div className="w-full h-[100vh] flex backdrop-brightness-50 bg-white/30">
