@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Weather from "./components/Weather/Weather";
-import TimeDate from "./components/TIme&Date/TimeDate";
+import TimeDate from "./components/TimeDate/TimeDate";
 import Note from "./components/Note/Note";
 import SearchBar from "./components/Search/SearchBar";
 import Categories from "./components/Categories/Categories";
@@ -16,7 +16,7 @@ export default function App() {
 
   useEffect(() => {
     // Fetch categories and set the first one as default
-    const categories = getCategories(); // Fetch categories
+    const categories = getCategories();
     if (categories.length > 0) {
       setSelectedCategory(categories[0]);
     }
@@ -55,13 +55,13 @@ export default function App() {
 
     // Clean up interval on component unmount
     return () => clearInterval(intervalId);
-  }, [handleShortcutChange]); // Include handleShortcutChange as a dependency
+  }, [handleShortcutChange]);
 
   return (
     <div className="w-full h-[100vh] flex backdrop-brightness-50 bg-white/30">
       <section className="w-4/12 max-w-[20vw] h-fit mx-8 my-4 flex flex-col gap-3 mt-8">
         <TimeDate />
-        <Weather /> {/* Weather component will not reload on category change */}
+        {/* <Weather /> */}
         <Note />
       </section>
       <main className="w-[70vw] max-h-[80vh] my-8">
@@ -74,10 +74,9 @@ export default function App() {
             <Shortcuts
               shortcuts={shortcuts}
               selectedCategory={selectedCategory}
-              onEditShortcut={(shortcut) => {
-                setEditShortcut(shortcut);
-                setShowShortcutModal(true);
-              }}
+              setEditShortcut={setEditShortcut}
+              setIsMakeShortcutOpen={setShowShortcutModal}
+              onShortcutChange={handleShortcutChange}
             />
           )}
         </div>
@@ -85,6 +84,8 @@ export default function App() {
       {showShortcutModal && (
         <MakeShortcut
           onClose={handleCloseModal}
+          setEditShortcut={setEditShortcut}
+          setIsMakeShortcutOpen={setShowShortcutModal}
           editShortcut={editShortcut}
           selectedCategory={selectedCategory}
           onShortcutChange={handleShortcutChange}

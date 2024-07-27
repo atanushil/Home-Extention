@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { addShortcutToCategory, updateShortcut } from "../../../Data/LocalDataManager";
+import {
+  addShortcutToCategory,
+  updateShortcut,
+} from "../../../Data/LocalDataManager";
 
-export default function MakeShortcut({ onClose, editShortcut, selectedCategory }) {
+export default function MakeShortcut({
+  onClose,
+  setEditShortcut,
+  setIsMakeShortcutOpen,
+  editShortcut,
+  selectedCategory,
+  onShortcutChange
+}) {
   const [name, setName] = useState(editShortcut ? editShortcut.name : "");
   const [link, setLink] = useState(editShortcut ? editShortcut.link : "");
 
@@ -9,6 +19,9 @@ export default function MakeShortcut({ onClose, editShortcut, selectedCategory }
     if (editShortcut) {
       setName(editShortcut.name);
       setLink(editShortcut.link);
+    } else {
+      setName("");
+      setLink("");
     }
   }, [editShortcut]);
 
@@ -21,6 +34,7 @@ export default function MakeShortcut({ onClose, editShortcut, selectedCategory }
       // Add a new shortcut
       addShortcutToCategory(selectedCategory, { name, link });
     }
+    onShortcutChange(); // Call the function to handle the change
     onClose(); // Close the modal
   };
 
@@ -32,7 +46,9 @@ export default function MakeShortcut({ onClose, editShortcut, selectedCategory }
         </h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">Name</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Name
+            </label>
             <input
               type="text"
               value={name}
@@ -42,7 +58,9 @@ export default function MakeShortcut({ onClose, editShortcut, selectedCategory }
             />
           </div>
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">Link</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Link
+            </label>
             <input
               type="url"
               value={link}
@@ -54,7 +72,10 @@ export default function MakeShortcut({ onClose, editShortcut, selectedCategory }
           <div className="flex justify-end gap-2">
             <button
               type="button"
-              onClick={onClose}
+              onClick={() => {
+                setEditShortcut(null); // Optional: Reset edit shortcut
+                setIsMakeShortcutOpen(false); // Close the modal
+              }}
               className="bg-gray-500 text-white px-4 py-2 rounded"
             >
               Cancel
@@ -62,6 +83,7 @@ export default function MakeShortcut({ onClose, editShortcut, selectedCategory }
             <button
               type="submit"
               className="bg-blue-500 text-white px-4 py-2 rounded"
+              disabled={!name || !link}
             >
               {editShortcut ? "Save Changes" : "Add Shortcut"}
             </button>

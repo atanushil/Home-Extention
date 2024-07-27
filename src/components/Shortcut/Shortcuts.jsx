@@ -27,7 +27,7 @@ export default function Shortcuts({ shortcuts, selectedCategory }) {
   const handleRemove = (name) => {
     deleteShortcut(selectedCategory, name);
     // Add logic to refresh the shortcut list if necessary
-    console.log("Category:",selectedCategory,":-->Shortcut:-->",name);
+    console.log("Category:", selectedCategory, ":-->Shortcut:-->", name);
   };
 
   return (
@@ -37,10 +37,7 @@ export default function Shortcuts({ shortcuts, selectedCategory }) {
           const key = shortcut.id ? shortcut.id : `fallback-key-${index}`; // Fallback key if id is undefined
 
           return (
-            <div
-              className="self-start justify-start place-self-start"
-              key={key}
-            >
+            <div className="self-start justify-start place-self-start" key={key}>
               <ShortcutItem
                 onRemove={() => handleRemove(shortcut.name)}
                 faviconLink={getFaviconUrl(shortcut.link)}
@@ -58,6 +55,8 @@ export default function Shortcuts({ shortcuts, selectedCategory }) {
         {isMakeShortcutOpen && (
           <MakeShortcut
             onClose={() => setIsMakeShortcutOpen(false)}
+            setEditShortcut={setEditShortcut}
+            setIsMakeShortcutOpen={setIsMakeShortcutOpen}
             editShortcut={editShortcut}
             selectedCategory={selectedCategory}
             onShortcutChange={() => {
