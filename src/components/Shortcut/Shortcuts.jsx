@@ -32,12 +32,12 @@ export default function Shortcuts({ shortcuts, selectedCategory }) {
 
   return (
     <div className="p-4">
-      <div className="flex flex-wrap gap-2 max-h-fit justify-center overflow-y-auto h-fit">
+      <div className="flex flex-wrap gap-2 max-h-fit justify-between lg:justify-normal overflow-y-auto h-fit">
         {shortcuts.map((shortcut, index) => {
           const key = shortcut.id ? shortcut.id : `fallback-key-${index}`; // Fallback key if id is undefined
 
           return (
-            <div className="self-start justify-start place-self-start" key={key}>
+            <div className="self-start justify-start rounded-md place-self-start" key={key}>
               <ShortcutItem
                 onRemove={() => handleRemove(shortcut.name)}
                 faviconLink={getFaviconUrl(shortcut.link)}

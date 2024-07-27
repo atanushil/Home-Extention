@@ -8,7 +8,7 @@ export default function Note() {
   return (
     <div className="">
       <button
-        className="flex items-center justify-center  bg-red-50 w-full max-w-xs gap-3 rounded-md py-2 px-2 hover:bg-red-100 transition-colors duration-300"
+        className="flex items-center justify-center lg:w-full bg-red-50 w-full max-w-lg gap-3 rounded-md py-2 px-2  hover:bg-red-100 transition-colors duration-300"
         onClick={handleNoteClick}
       >
         <p className="text-base font-semibold">Note</p>

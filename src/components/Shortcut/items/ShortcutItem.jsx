@@ -57,8 +57,8 @@ export default function ShortcutItem({ faviconLink, name, link, onEdit, onRemove
           </div>
         </div>
       )}
-      <div className="flex flex-col items-center h-full justify-center">
-        <div className="icon p-2 w-full flex justify-center h-12">
+      <div className="flex flex-col items-center h-full justify-center rounded-md">
+        <div className="icon p-2 w-full flex justify-center  h-12">
           {faviconError ? (
             <div className="w-fit px-3 rounded-full h-full flex items-center justify-center bg-gray-200 text-gray-600 text-2xl font-bold"
               onClick={handleClick}>
@@ -68,7 +68,7 @@ export default function ShortcutItem({ faviconLink, name, link, onEdit, onRemove
             <img
               src={faviconLink}
               alt={`${name} favicon`}
-              className="h-full max-w-full object-contain"
+              className="h-full max-w-full rounded-full object-contain"
               onError={handleFaviconError}
               onClick={handleClick}
             />

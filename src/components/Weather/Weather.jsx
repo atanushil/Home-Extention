@@ -19,11 +19,12 @@ const Weather = React.memo(() => {
 
       try {
         const response = await axios.get(weatherUrl, weatherOptions);
+        console.log("Weather data:", response.data);
         setWeatherData(response.data);
         localStorage.setItem('weatherData', JSON.stringify(response.data));
       } catch (error) {
         setError("Failed to fetch weather data");
-        console.error(error);
+        console.error("Weather API error:", error);
       }
     };
 
@@ -32,11 +33,12 @@ const Weather = React.memo(() => {
 
       try {
         const response = await axios.get(locationUrl);
+        console.log("Location data:", response.data.address);
         setLocation(response.data.address);
         localStorage.setItem('location', JSON.stringify(response.data.address));
       } catch (error) {
         setError("Failed to fetch location name");
-        console.error(error);
+        console.error("Location API error:", error);
       }
     };
 
@@ -45,12 +47,14 @@ const Weather = React.memo(() => {
         navigator.geolocation.getCurrentPosition(
           (position) => {
             const { latitude, longitude } = position.coords;
+            console.log("Latitude:", latitude, "Longitude:", longitude);
 
             // Check if weather data is already cached
             const cachedWeather = localStorage.getItem('weatherData');
             const cachedLocation = localStorage.getItem('location');
 
             if (cachedWeather && cachedLocation) {
+              console.log("Using cached data");
               setWeatherData(JSON.parse(cachedWeather));
               setLocation(JSON.parse(cachedLocation));
             } else {
@@ -60,7 +64,7 @@ const Weather = React.memo(() => {
           },
           (error) => {
             setError("Failed to get location");
-            console.error(error);
+            console.error("Geolocation error:", error);
           }
         );
       } else {
@@ -72,15 +76,16 @@ const Weather = React.memo(() => {
   }, []);
 
   return (
-    <div className="bg-gray-400 p-2 rounded-md ">
-      {error && <div>{error}</div>}
+    <div className="bg-gray-400 p-4 rounded-md max-w-sm shadow-lg">
+      {error && <div className="text-red-600">{error}</div>}
       {weatherData && location ? (
         <div>
-          <h3>Weather in {location.city || location.town || location.village}</h3>
-          <p>Temperature: {weatherData.temp}°C</p>
-          <p>Condition: {weatherData.description}</p>
-          <p>Humidity: {weatherData.humidity}%</p>
-          <p>Wind Speed: {weatherData.wind_speed} m/s</p>
+          <h3 className="text-xl font-semibold">
+            Weather in {location.city || location.town || location.village}
+          </h3>
+          <p className="text-lg">Temperature: {weatherData.temp}°C</p>
+          <p className="text-lg">Humidity: {weatherData.humidity}%</p>
+          <p className="text-lg">Wind Speed: {weatherData.wind_speed} m/s</p>
         </div>
       ) : (
         !error && <div>Loading weather data...</div>

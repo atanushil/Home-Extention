@@ -59,7 +59,7 @@ export default function App() {
 
   return (
     <div className="w-full h-[100vh] sm:flex-row flex flex-col items-center sm:items-stretch backdrop-brightness-50 bg-white/30">
-      <section className="w-10/12 lg:max-w-[20vw]  h-fit mx-8 my-4 flex flex-col gap-3 mt-8">
+      <section className="w-10/12 lg:max-w-[20vw]   h-fit mx-8 my-4 flex flex-col gap-3 mt-8">
         <TimeDate  />
         <Weather />
         <Note />
@@ -68,7 +68,7 @@ export default function App() {
         <div>
           <SearchBar />
         </div>
-        <div className="my-2 overflow-x-auto flex flex-col gap-2 scrollbar-hidden">
+        <div className="my-2 overflow-x-auto flex flex-col  gap-2 scrollbar-hidden">
           <Categories onCategoryClick={handleCategoryClick} />
           {selectedCategory && (
             <Shortcuts
