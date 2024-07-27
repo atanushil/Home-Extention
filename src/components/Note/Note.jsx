@@ -6,9 +6,9 @@ export default function Note() {
   };
 
   return (
-    <div className="">
+    <div className="w-full">
       <button
-        className="flex items-center justify-center lg:w-full bg-red-50 w-full max-w-lg gap-3 rounded-md py-2 px-2  hover:bg-red-100 transition-colors duration-300"
+        className="flex items-center justify-center w-full gap-3 rounded-md py-2 px-2 bg-red-50 hover:bg-red-100 transition-colors duration-300 sm:w-full md:w-full lg:w-full xl:w-full 2xl:w-full"
         onClick={handleNoteClick}
       >
         <p className="text-base font-semibold">Note</p>
