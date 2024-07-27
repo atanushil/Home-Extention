@@ -6,8 +6,8 @@ import {
   addCategory,
   editCategory,
   deleteCategory,
-  getCategories
-} from '../../Data/LocalDataManager';
+  getCategories,
+} from "../../Data/LocalDataManager";
 
 export default function Categories({ onCategoryClick }) {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -55,22 +55,27 @@ export default function Categories({ onCategoryClick }) {
     }
   };
 
+  const isMakeCategoryActive = isEditing || isAdding;
+
   return (
     <div className="flex gap-2 items-center border-b-red-600 border-b-2">
-      <AddCategories onAddCategory={handleAddCategoryClick} />
-      {(isEditing || isAdding) && (
-        <MakeCategories
-          category={isEditing ? selectedCategory : ''}
-          onSaveCategory={handleSaveCategory}
-          onClose={handleClose}
-        />
-      )}
       <Items
         categories={categories}
         onEditCategory={onEditCategory}
         onDeleteCategory={onDeleteCategory}
         onCategoryClick={handleCategoryClick} // Pass the handler to Items component
       />
+      {(isEditing || isAdding) && (
+        <MakeCategories
+          category={isEditing ? selectedCategory : ""}
+          onSaveCategory={handleSaveCategory}
+          onClose={handleClose}
+        />
+      )}
+
+      {!isMakeCategoryActive && (
+        <AddCategories onAddCategory={handleAddCategoryClick} />
+      )}
     </div>
   );
 }
