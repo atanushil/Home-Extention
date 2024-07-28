@@ -15,7 +15,7 @@ Before you begin, ensure you have met the following requirements:
 1. **Clone the repository**: Use the following command to clone the repository to your local machine:
 
     ```bash
-    git clone https://github.com/yourusername/sweet-home.git
+        https://github.com/atanushil/Home-Extention.git
     ```
 
 2. **Navigate to the project directory**:
