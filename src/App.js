@@ -7,7 +7,6 @@ import Categories from "./components/Categories/Categories";
 import Shortcuts from "./components/Shortcut/Shortcuts";
 import MakeShortcut from "./components/Shortcut/items/MakeShortcut";
 import { getCategories, getShortcuts } from "./Data/LocalDataManager";
-import Alert from "./components/Alert";
 import { Panel } from "./components/Right-Panel/Panel";
 
 export default function App() {
