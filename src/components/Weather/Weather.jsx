@@ -19,12 +19,10 @@ const Weather = React.memo(() => {
 
       try {
         const response = await axios.get(weatherUrl, weatherOptions);
-        console.log("Weather data:", response.data);
         setWeatherData(response.data);
         localStorage.setItem('weatherData', JSON.stringify(response.data));
       } catch (error) {
         setError("Failed to fetch weather data");
-        console.error("Weather API error:", error);
       }
     };
 
@@ -33,12 +31,10 @@ const Weather = React.memo(() => {
 
       try {
         const response = await axios.get(locationUrl);
-        console.log("Location data:", response.data.address);
         setLocation(response.data.address);
         localStorage.setItem('location', JSON.stringify(response.data.address));
       } catch (error) {
         setError("Failed to fetch location name");
-        console.error("Location API error:", error);
       }
     };
 
@@ -48,13 +44,10 @@ const Weather = React.memo(() => {
           (position) => {
             const { latitude, longitude } = position.coords;
             console.log("Latitude:", latitude, "Longitude:", longitude);
-
-            // Check if weather data is already cached
             const cachedWeather = localStorage.getItem('weatherData');
             const cachedLocation = localStorage.getItem('location');
 
             if (cachedWeather && cachedLocation) {
-              console.log("Using cached data");
               setWeatherData(JSON.parse(cachedWeather));
               setLocation(JSON.parse(cachedLocation));
             } else {
@@ -62,10 +55,7 @@ const Weather = React.memo(() => {
               fetchLocationName(latitude, longitude);
             }
           },
-          (error) => {
-            setError("Failed to get location");
-            console.error("Geolocation error:", error);
-          }
+          () => setError("Failed to get location")
         );
       } else {
         setError("Geolocation is not supported by this browser.");

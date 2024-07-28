@@ -7,7 +7,6 @@ import Categories from "./components/Categories/Categories";
 import Shortcuts from "./components/Shortcut/Shortcuts";
 import MakeShortcut from "./components/Shortcut/items/MakeShortcut";
 import { getCategories, getShortcuts } from "./Data/LocalDataManager";
-import AddShortcuts from "./components/Shortcut/items/AddShortcuts";
 
 export default function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -47,20 +46,17 @@ export default function App() {
     setEditShortcut(null);
     setShowShortcutModal(false);
   };
-  const [isMakeShortcutOpen, setIsMakeShortcutOpen] = useState(false);
 
   useEffect(() => {
     // Set up interval to refresh shortcuts every second
-    const intervalId = setInterval(() => {
-      handleShortcutChange();
-    }, 1000); // 1000 milliseconds = 1 second
+    const intervalId = setInterval(handleShortcutChange, 1000);
 
     // Clean up interval on component unmount
     return () => clearInterval(intervalId);
   }, [handleShortcutChange]);
 
   return (
-    <div className="w-full h-[100vh] flex flex-col lg:flex-row items-center lg:items-stretch backdrop-brightness-50 bg-white/30">
+    <div className="w-full h-[100vh] flex flex-col lg:flex-row items-center lg:items-stretch backdrop-brightness-50 bg-white/30 caret-transparent">
       <section className="w-10/12 md:w-10/12 lg:w-1/4 xl:w-1/5 h-fit mx-8 my-4 flex flex-col gap-3 mt-8">
         <TimeDate />
         <Weather />
@@ -72,19 +68,16 @@ export default function App() {
         </div>
         <div className="my-2 overflow-x-auto flex flex-col gap-2 scrollbar-hidden w-full">
           <Categories onCategoryClick={handleCategoryClick} />
-          {selectedCategory && (<>
-            <Shortcuts
-              shortcuts={shortcuts}
-              selectedCategory={selectedCategory}
-              setEditShortcut={setEditShortcut}
-              setIsMakeShortcutOpen={setShowShortcutModal}
-              onShortcutChange={handleShortcutChange}
-            />
-            {/* <AddShortcuts
-          onClick={() => setIsMakeShortcutOpen(true)}
-          name={"Add Shortcut"}
-        /> */}
-        </>
+          {selectedCategory && (
+            <>
+              <Shortcuts
+                shortcuts={shortcuts}
+                selectedCategory={selectedCategory}
+                setEditShortcut={setEditShortcut}
+                setIsMakeShortcutOpen={setShowShortcutModal}
+                onShortcutChange={handleShortcutChange}
+              />
+            </>
           )}
         </div>
       </main>
