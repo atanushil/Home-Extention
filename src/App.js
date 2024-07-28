@@ -7,6 +7,8 @@ import Categories from "./components/Categories/Categories";
 import Shortcuts from "./components/Shortcut/Shortcuts";
 import MakeShortcut from "./components/Shortcut/items/MakeShortcut";
 import { getCategories, getShortcuts } from "./Data/LocalDataManager";
+import Alert from "./components/Alert";
+import Panel from "./components/Right-Panel/Panel";
 
 export default function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -57,7 +59,7 @@ export default function App() {
 
   return (
     <div className="w-full h-[100vh] flex flex-col lg:flex-row items-center lg:items-stretch backdrop-brightness-50 bg-white/30 caret-transparent">
-      <section className="w-10/12 md:w-10/12 lg:w-1/4 xl:w-1/5 h-fit mx-8 my-4 flex flex-col gap-3 mt-8">
+      <section className="w-10/12 md:w-10/12 lg:w-1/4 xl:w-1/5 h-fit mx-8 my-4 flex rounded-md flex-col gap-3 mt-8">
         <TimeDate />
         <Weather />
         <Note />
@@ -81,6 +83,13 @@ export default function App() {
           )}
         </div>
       </main>
+      <section
+        className="panel bg-red-500 w-full sm:w-full md:w-full lg:w-fit xl:w-fit 2xl:w-fit py-8 flex items-start fixed bottom-0 left-0 right-0 sm:bottom-0 sm:left-0 sm:right-0 justify-center
+      sm:justify-center md:bottom-0 md:left-0 md:right-0 md:justify-center lg:bottom-0 lg:left-0 lg:right-0 lg:justify-center lg:relative xl:relative 2xl:relative xl:bottom-auto 2xl:bottom-auto"
+      >
+        <Panel />
+      </section>
+
       {showShortcutModal && (
         <MakeShortcut
           onClose={handleCloseModal}
