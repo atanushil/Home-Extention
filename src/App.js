@@ -8,7 +8,7 @@ import Shortcuts from "./components/Shortcut/Shortcuts";
 import MakeShortcut from "./components/Shortcut/items/MakeShortcut";
 import { getCategories, getShortcuts } from "./Data/LocalDataManager";
 import Alert from "./components/Alert";
-import Panel from "./components/Right-Panel/Panel";
+import { Panel } from "./components/Right-Panel/Panel";
 
 export default function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -83,12 +83,9 @@ export default function App() {
           )}
         </div>
       </main>
-      <section
-        className="panel  px-1 h-fit w-full sm:w-full md:w-full lg:w-fit xl:w-fit 2xl:w-fit my-8 flex items-start fixed bottom-0 left-0 right-0 sm:bottom-0 sm:left-0 sm:right-0 justify-center
-      sm:justify-center md:bottom-0 md:left-0 md:right-0 md:justify-center lg:bottom-0 lg:left-0 lg:right-0 lg:justify-center lg:relative xl:relative 2xl:relative xl:bottom-auto 2xl:bottom-auto"
-      >
-        <Panel />
-      </section>
+     <section className="mt-8 px-2">
+      <Panel/>
+     </section>
 
       {showShortcutModal && (
         <MakeShortcut
