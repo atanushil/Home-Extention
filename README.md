@@ -1,4 +1,4 @@
-# Sweet Home
+# Sweet Home - Organize Your Categories, Shortcuts
 
 Sweet Home is a web application designed to help users organize their categories, shortcuts using local storage.And it also show some developer most visit website and some google apps. Built with React.js this application is fully responsive and utilizes Tailwind CSS for styling. 
 
@@ -66,9 +66,9 @@ We welcome contributions to the Sweet Home project! If you’d like to contribut
 
 5. **Open a pull request**: Submit a pull request to the `main` branch of the original repository.
    
-##✨ Loving this project? Shine a light with a star! ✨
+✨ Loving this project? Shine a light with a star! ✨
 
-##If this project has sparked your interest or made your day a little brighter, let us know by giving it a star. Your support helps keep the creativity flowing and the code growing! ⭐️🚀
+If this project has sparked your interest or made your day a little brighter, let us know by giving it a star. Your support helps keep the creativity flowing and the code growing! ⭐️🚀
 ---
 
 For any questions or issues, please contact [atanushil358@gmail.com](mailto:atanushil358@gmail.com).
