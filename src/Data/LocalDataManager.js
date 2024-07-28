@@ -59,51 +59,62 @@ export function deleteCategory(categoryName) {
 }
 
 // Function to add a shortcut to an existing category
+// Function to add a shortcut to an existing category
 export function addShortcutToCategory(categoryName, shortcut) {
-  console.log(`Adding new shortcut: ${JSON.stringify(shortcut)} to category: ${categoryName}`);
   const data = getData();
   const category = data.categories.find(
     (category) => category.categoryName === categoryName
   );
-  console.log('Found category:', category);
+
   if (category) {
     const shortcutExists = category.shortcuts.some(
-      (s) => s.name === shortcut.name
+      (s) => s.name === shortcut.name || s.link === shortcut.link
     );
+
     if (!shortcutExists) {
       category.shortcuts.push(shortcut);
       saveData(data);
+      console.log(`Adding new shortcut: ${JSON.stringify(shortcut)} to category: ${categoryName}`);
     } else {
-      console.log(`Shortcut ${shortcut.name} already exists in category ${categoryName}`);
+      console.log(`Shortcut with the same name or link already exists in category ${categoryName}`);
     }
   } else {
     console.log(`Category ${categoryName} not found`);
+    alert("Select a category from categories section.");
   }
 }
 
 // Function to edit a shortcut in an existing category
-// Function to edit a shortcut in an existing category
 export function updateShortcut(categoryName, oldShortcutName, newShortcut) {
-  console.log(`Updating shortcut: ${oldShortcutName} to ${JSON.stringify(newShortcut)} in category: ${categoryName}`);
   const data = getData();
   const category = data.categories.find(
     (category) => category.categoryName === categoryName
   );
+
   if (category) {
     const shortcut = category.shortcuts.find(
       (shortcut) => shortcut.name === oldShortcutName
     );
+
     if (shortcut) {
       const newShortcutExists = category.shortcuts.some(
         (s) => s.name === newShortcut.name && s.name !== oldShortcutName
       );
-      if (!newShortcutExists) {
+      const linkExists = category.shortcuts.some(
+        (s) => s.link === newShortcut.link && s.link !== shortcut.link
+      );
+
+      if (newShortcut.name === oldShortcutName && newShortcut.link === shortcut.link) {
+        console.log("Update not required because previous and given shortcut name and link are the same");
+      } else if (linkExists) {
+        console.log(`Link ${newShortcut.link} already exists in category ${categoryName}`);
+      } else if (newShortcutExists) {
+        console.log(`Shortcut ${newShortcut.name} already exists in category ${categoryName}`);
+      } else {
         shortcut.name = newShortcut.name;
         shortcut.link = newShortcut.link;
         saveData(data);
-        console.log(`Shortcut ${oldShortcutName} updated successfully.`);
-      } else {
-        console.log(`Shortcut ${newShortcut.name} already exists in category ${categoryName}`);
+        console.log(`Updating shortcut: ${oldShortcutName} to ${JSON.stringify(newShortcut)} in category: ${categoryName}`);
       }
     } else {
       console.log(`Shortcut ${oldShortcutName} not found in category ${categoryName}`);
@@ -112,6 +123,7 @@ export function updateShortcut(categoryName, oldShortcutName, newShortcut) {
     console.log(`Category ${categoryName} not found`);
   }
 }
+
 
 
 // Function to delete a shortcut from an existing category

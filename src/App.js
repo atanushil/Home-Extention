@@ -7,6 +7,7 @@ import Categories from "./components/Categories/Categories";
 import Shortcuts from "./components/Shortcut/Shortcuts";
 import MakeShortcut from "./components/Shortcut/items/MakeShortcut";
 import { getCategories, getShortcuts } from "./Data/LocalDataManager";
+import AddShortcuts from "./components/Shortcut/items/AddShortcuts";
 
 export default function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -46,6 +47,7 @@ export default function App() {
     setEditShortcut(null);
     setShowShortcutModal(false);
   };
+  const [isMakeShortcutOpen, setIsMakeShortcutOpen] = useState(false);
 
   useEffect(() => {
     // Set up interval to refresh shortcuts every second
@@ -64,13 +66,13 @@ export default function App() {
         <Weather />
         <Note />
       </section>
-      <main className="lg:w-3/4 xl:w-4/5 w-10/12 lg:max-h-[80vh] my-0 sm:my-8 flex flex-col items-center">
+      <main className="lg:w-9/12 xl:min-w-4/5 2xl:w-9/12 w-10/12 lg:max-h-[80vh] my-0 sm:my-8 flex flex-col items-center">
         <div className="w-full">
           <SearchBar />
         </div>
         <div className="my-2 overflow-x-auto flex flex-col gap-2 scrollbar-hidden w-full">
           <Categories onCategoryClick={handleCategoryClick} />
-          {selectedCategory && (
+          {selectedCategory && (<>
             <Shortcuts
               shortcuts={shortcuts}
               selectedCategory={selectedCategory}
@@ -78,6 +80,11 @@ export default function App() {
               setIsMakeShortcutOpen={setShowShortcutModal}
               onShortcutChange={handleShortcutChange}
             />
+            {/* <AddShortcuts
+          onClick={() => setIsMakeShortcutOpen(true)}
+          name={"Add Shortcut"}
+        /> */}
+        </>
           )}
         </div>
       </main>

@@ -24,6 +24,7 @@ export default function Categories({ onCategoryClick }) {
   const onDeleteCategory = (category) => {
     deleteCategory(category);
     setCategories(getCategories()); // Refresh categories after deletion
+    setSelectedCategory(null)
   };
 
   const handleSaveCategory = (categoryName) => {
