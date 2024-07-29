@@ -33,14 +33,14 @@ export default function Items({ categories, onEditCategory, onDeleteCategory, on
   };
 
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 overflow-x-auto">
       {categories.map((category, index) => (
         <div
           key={index}
-          className="flex items-center border w-fit px-2 rounded-full my-2 backdrop-blur-sm bg-white/30 cursor-pointer"
+          className="flex items-center justify-between border w-fit h-6 px-4 rounded-full my-2 backdrop-blur-sm bg-white/30 cursor-pointer"
           onClick={() => handleClick(index)}
         >
-          <div className="pr-2">{category}</div>
+          <div className="flex items-center pr-2 whitespace-nowrap">{category}</div>
           {selectedCategoryIndex === index && (
             <div className="flex items-center gap-1">
               <FaRegEdit

@@ -63,11 +63,11 @@ export default function App() {
         <Weather />
         <Note />
       </section>
-      <main className="lg:w-9/12 xl:min-w-4/5 2xl:w-9/12 w-10/12 lg:h-3/5 sm:h-3/5 md:h-3/5 my-0 sm:my-8 flex flex-col items-center">
+      <main className="lg:w-9/12 xl:min-w-4/5 2xl:w-9/12 w-10/12 lg:h-3/5 sm:h-3/5 md:h-3/5 my-0 sm:my-8 overflow-auto flex flex-col items-center">
         <div className="w-full">
           <SearchBar />
         </div>
-        <div className="my-2 flex flex-col gap-2 overflow-auto w-full">
+        <div className="my-2 flex flex-col gap-2 overflow-x-auto overflow-y-hidden h-fit w-full">
           <Categories onCategoryClick={handleCategoryClick} />
           {selectedCategory && (
             <>
