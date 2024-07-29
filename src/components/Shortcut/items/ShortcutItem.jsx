@@ -50,7 +50,7 @@ export default function ShortcutItem({
 
   return (
     <div className="relative w-28 h-28 px-1 py-2 rounded-lg hover:backdrop-blur-sm   hover:bg-white/30 cursor-pointer group">
-      <div className="absolute top-1 right-1 hidden group-hover:block">
+      <div className="absolute top-1 right-1 lg:hidden xl:hidden 2xl:hidden sm:block md:block group-hover:block">
         <BsThreeDotsVertical onClick={handleShowOption} />
       </div>
       {showOptions && (

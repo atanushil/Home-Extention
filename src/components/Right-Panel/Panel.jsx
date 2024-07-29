@@ -1,6 +1,5 @@
 import Google from "../../Media/google.png";
 import Calender from "../../Media/calender.png";
-// import Collection from '../../Media/collections.png';
 import Contacts from "../../Media/contacts.png";
 import Docs from "../../Media/docs.png";
 import Drive from "../../Media/drive.png";
@@ -15,8 +14,6 @@ import News from "../../Media/news.png";
 import Translate from "../../Media/translate.png";
 import Photos from "../../Media/photos.png";
 import Youtube from "../../Media/youtube.png";
-import { IoMdSettings } from "react-icons/io";
-import { IoExtensionPuzzleSharp } from "react-icons/io5";
 
 const imageLinks = [
   { src: Google, alt: "Google Logo", href: "https://myaccount.google.com/" },
@@ -39,29 +36,23 @@ const imageLinks = [
 
 export const Panel = () => {
   return (
-    <div className="lg:relative xl:relative sm:fixed md:fixed sm:bottom-0 md:bottom-0 lg:bottom-0 sm:left-0 md:left-0 lg:left-0  xl:w-fit 2xl:w-fit lg:w-fit sm:w-full md:w-full h-fit  flex  flex-col  backdrop-blur-lg rounded-md overflow-hidden">
-      <div className="flex rounded-md flex-wrap sm:w-full md:w-full lg:w-fit xl:w-fit 2xl:w-fit xl:flex-col sm:flex-row md:flex-row lg:flex-col  2xl:justify-center xl:justify-center lg:justify-center md:justify-between sm:justify-between items-center ">
+    <div className="fixed bottom-0 left-0 lg:relative xl:relative 2xl:relative xl:w-fit 2xl:w-fit lg:w-fit sm:w-fit md:w-full h-fit flex flex-col backdrop-blur-lg rounded-md overflow-hidden justify-center items-center">
+      <div className="flex rounded-md flex-wrap sm:flex md:flex-row md:flex lg:flex xl:flex 2xl:flex xl:w-fit 2xl:w-fit lg:w-fit sm:w-fit md:w-full h-fit xl:flex-col lg:flex-col 2xl:justify-center lg:justify-center md:justify-center justify-between xl:justify-center items-center">
         {imageLinks.map(({ src, alt, href }, index) => (
           <a
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex w-fit items-center justify-center hover:backdrop-blur-sm hover:bg-white px-1 py-2"
+            className={`flex w-fit items-center justify-center hover:backdrop-blur-sm hover:bg-white px-2 md:px-2.5 lg:px-1 xl:px-1 2xl:px-1 ${
+              index === 0 || index === imageLinks.length - 1
+                ? "py-2"
+                : "py-1 md:py-2 lg:py-0 xl:py-1 2xl:py-1.2 3xl:py-2"
+            }`}
             key={index}
           >
             <img src={src} alt={alt} width={32} height={32} />
           </a>
         ))}
-        <div className="px-1 py-2 flex  items-center justify-center hover:backdrop-blur-sm hover:bg-white">
-          <IoExtensionPuzzleSharp onClick={()=>window.open('https://chromewebstore.google.com/')}
-            size={32}
-          />
-          </div>
-          <div className="px-1 py-2 flex items-center justify-center hover:backdrop-blur-sm hover:bg-white">
-          <IoMdSettings
-            size={32}
-          />
-        </div>
       </div>
     </div>
   );

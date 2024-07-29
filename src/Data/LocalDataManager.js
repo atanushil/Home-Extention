@@ -20,7 +20,7 @@ export function addCategory(categoryName) {
     saveData(data);
   } else {
     let message=`Category ${categoryName} already exists`;
-    alert(message);
+    console.log(message);
   }
 }
 
@@ -38,10 +38,10 @@ export function editCategory(oldCategoryName, newCategoryName) {
       category.categoryName = newCategoryName;
       saveData(data);
     } else {
-      alert(`Category ${newCategoryName} already exists`);
+      console.log(`Category ${newCategoryName} already exists`);
     }
   } else {
-    alert(`Category ${oldCategoryName} not found`);
+    console.log(`Category ${oldCategoryName} not found`);
   }
 }
 
@@ -55,7 +55,7 @@ export function deleteCategory(categoryName) {
     data.categories.splice(categoryIndex, 1);
     saveData(data);
   } else {
-    alert(`Category ${categoryName} not found`);
+    console.log(`Category ${categoryName} not found`);
   }
 }
 
@@ -75,13 +75,13 @@ export function addShortcutToCategory(categoryName, shortcut) {
     if (!shortcutExists) {
       category.shortcuts.push(shortcut);
       saveData(data);
-      alert(`Adding new shortcut: ${JSON.stringify(shortcut)} to category: ${categoryName}`);
+      console.log(`Adding new shortcut: ${JSON.stringify(shortcut)} to category: ${categoryName}`);
     } else {
-      alert(`Shortcut with the same name or link already exists in category ${categoryName}`);
+      console.log(`Shortcut with the same name or link already exists in category ${categoryName}`);
     }
   } else {
     console.log(`Category ${categoryName} not found`);
-    alert("Select a category from categories section.");
+    console.log("Select a category from categories section.");
   }
 }
 
@@ -106,22 +106,22 @@ export function updateShortcut(categoryName, oldShortcutName, newShortcut) {
       );
 
       if (newShortcut.name === oldShortcutName && newShortcut.link === shortcut.link) {
-        alert("Update not required because previous and given shortcut name and link are the same");
+        console.log("Update not required because previous and given shortcut name and link are the same");
       } else if (linkExists) {
-        alert(`Link ${newShortcut.link} already exists in category ${categoryName}`);
+        console.log(`Link ${newShortcut.link} already exists in category ${categoryName}`);
       } else if (newShortcutExists) {
-        alert(`Shortcut ${newShortcut.name} already exists in category ${categoryName}`);
+        console.log(`Shortcut ${newShortcut.name} already exists in category ${categoryName}`);
       } else {
         shortcut.name = newShortcut.name;
         shortcut.link = newShortcut.link;
         saveData(data);
-        alert(`Updating shortcut: ${oldShortcutName} to ${JSON.stringify(newShortcut)} in category: ${categoryName}`);
+        console.log(`Updating shortcut: ${oldShortcutName} to ${JSON.stringify(newShortcut)} in category: ${categoryName}`);
       }
     } else {
-      alert(`Shortcut ${oldShortcutName} not found in category ${categoryName}`);
+      console.log(`Shortcut ${oldShortcutName} not found in category ${categoryName}`);
     }
   } else {
-    alert(`Category ${categoryName} not found`);
+    console.log(`Category ${categoryName} not found`);
   }
 }
 
@@ -141,10 +141,10 @@ export function deleteShortcut(categoryName, shortcutName) {
       category.shortcuts.splice(shortcutIndex, 1);
       saveData(data);
     } else {
-      alert(`Shortcut ${shortcutName} not found in category ${categoryName}`);
+      console.log(`Shortcut ${shortcutName} not found in category ${categoryName}`);
     }
   } else {
-    alert(`Category ${categoryName} not found`);
+    console.log(`Category ${categoryName} not found`);
   }
 }
 

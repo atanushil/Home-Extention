@@ -57,17 +57,17 @@ export default function App() {
   }, [handleShortcutChange]);
 
   return (
-    <div className="w-full h-[100vh] flex flex-col lg:flex-row items-center lg:items-stretch backdrop-brightness-50 bg-white/30 caret-transparent">
-      <section className="w-10/12 md:w-10/12 lg:w-1/4 xl:w-1/5 h-fit mx-8 my-4 flex rounded-md flex-col gap-3 mt-8">
+    <div className="w-full h-[100vh] flex flex-col lg:flex-row items-center lg:items-stretch backdrop-brightness-50 bg-white/30 ">
+      <section className="w-10/12 md:w-10/12 lg:w-1/4 xl:w-1/5 h-fit mx-8 my-2 flex rounded-md flex-col gap-3 sm:mt-2 md:mt-4 lg:mt-8 xl:mt-8 2xl:mt-8">
         <TimeDate />
         <Weather />
         <Note />
       </section>
-      <main className="lg:w-9/12 xl:min-w-4/5 2xl:w-9/12 w-10/12 lg:max-h-[80vh] my-0 sm:my-8 flex flex-col items-center">
+      <main className="lg:w-9/12 xl:min-w-4/5 2xl:w-9/12 w-10/12 lg:h-3/5 sm:h-3/5 md:h-3/5 my-0 sm:my-8 flex flex-col items-center">
         <div className="w-full">
           <SearchBar />
         </div>
-        <div className="my-2 overflow-x-auto flex flex-col gap-2 scrollbar-hidden w-full">
+        <div className="my-2 flex flex-col gap-2 overflow-auto w-full">
           <Categories onCategoryClick={handleCategoryClick} />
           {selectedCategory && (
             <>

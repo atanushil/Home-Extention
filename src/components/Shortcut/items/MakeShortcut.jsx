@@ -39,7 +39,7 @@ export default function MakeShortcut({
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center backdrop-blur-sm bg-black/50">
+    <div className="fixed inset-0 flex items-center justify-center backdrop-blur-sm bg-black/50 z-50">
       <div className="bg-white/50 p-4 rounded shadow-lg lg:w-[30%] backdrop-blur-sm">
         <h2 className="text-xl font-bold mb-4 text-white">
           {editShortcut ? "Edit Shortcut" : "Add Shortcut"}
@@ -51,9 +51,10 @@ export default function MakeShortcut({
             </label>
             <input
               type="text"
+              placeholder="Example"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm px-2"
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm px-2  placeholder:text-sm"
               required
             />
           </div>
@@ -64,8 +65,9 @@ export default function MakeShortcut({
             <input
               type="url"
               value={link}
+              placeholder="https://example.com"
               onChange={(e) => setLink(e.target.value)}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm px-2"
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm px-2 placeholder:text-sm"
               required
             />
           </div>
