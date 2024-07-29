@@ -11,18 +11,7 @@ import "./index.css";
 import InfiniteSlider from "./components/Slider/InfiniteSlider";
 import { ChromePicker } from "react-color";
 
-const calculateContrast = (hex) => {
-  // Convert hex to RGB
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
 
-  // Calculate luminance
-  const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-
-  // Return 'black' or 'white' based on luminance
-  return luminance > 128 ? "#000000" : "#FFFFFF";
-};
 
 export default function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -31,7 +20,6 @@ export default function App() {
   const [editShortcut, setEditShortcut] = useState(null);
   const [bgColor, setBgColor] = useState("#9ca3af"); // Default background color
   const [showPicker, setShowPicker] = useState(false);
-  const [textColor, setTextColor] = useState("#5c575a"); // Default text color is white
   const pickerRef = useRef(null);
 
   useEffect(() => {
@@ -73,10 +61,6 @@ export default function App() {
   }, [handleShortcutChange]);
 
   useEffect(() => {
-    setTextColor(calculateContrast(bgColor));
-  }, [bgColor]);
-
-  useEffect(() => {
     const handleClickOutside = (event) => {
       if (pickerRef.current && !pickerRef.current.contains(event.target)) {
         setShowPicker(false);
@@ -93,7 +77,7 @@ export default function App() {
   return (
     <div
       className="w-full h-[100vh] flex flex-col lg:flex-row items-center lg:items-stretch backdrop-brightness-50"
-      style={{ backgroundColor: bgColor, color: textColor }}
+      style={{ backgroundColor: bgColor }}
     >
       <section className="w-10/12 md:w-10/12 lg:w-1/4 xl:w-1/5 h-fit mx-8 my-2 flex rounded-md flex-col gap-3 sm:mt-2 md:mt-4 lg:mt-8 xl:mt-8 2xl:mt-8">
         <TimeDate />
