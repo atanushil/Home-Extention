@@ -8,17 +8,17 @@ export default function Shortcuts({ shortcuts, selectedCategory }) {
   const [isMakeShortcutOpen, setIsMakeShortcutOpen] = useState(false);
   const [editShortcut, setEditShortcut] = useState(null);
 
-  // Function to derive favicon URL from the base URL
+
   const getFaviconUrl = (url) => {
     const urlObject = new URL(url);
     return `${urlObject.origin}/favicon.ico`;
   };
 
-  // Function to truncate long names
+
   const truncateName = (name) =>
     name.length > 10 ? `${name.substring(0, 10)}...` : name;
 
-  // Function to handle editing a shortcut
+
   const handleEditShortcut = (shortcut) => {
     setEditShortcut(shortcut);
     setIsMakeShortcutOpen(true);
@@ -26,7 +26,6 @@ export default function Shortcuts({ shortcuts, selectedCategory }) {
 
   const handleRemove = (name) => {
     deleteShortcut(selectedCategory, name);
-    // Add logic to refresh the shortcut list if necessary
     console.log("Shortcut", name, "deleted from", selectedCategory, "category");
   };
 
@@ -34,7 +33,7 @@ export default function Shortcuts({ shortcuts, selectedCategory }) {
     <div className="p-4">
       <div className="flex flex-wrap gap-2 max-h-[50vh] overflow-y-auto h-fit justify-between lg:justify-start">
         {shortcuts.map((shortcut, index) => {
-          const key = shortcut.id ? shortcut.id : `fallback-key-${index}`; // Fallback key if id is undefined
+          const key = shortcut.id ? shortcut.id : `fallback-key-${index}`; 
 
           return (
             <div className="self-start justify-start rounded-md place-self-start" key={key}>
@@ -60,7 +59,7 @@ export default function Shortcuts({ shortcuts, selectedCategory }) {
             editShortcut={editShortcut}
             selectedCategory={selectedCategory}
             onShortcutChange={() => {
-              // Add logic to refresh the shortcut list if necessary
+
               setIsMakeShortcutOpen(false);
             }}
           />

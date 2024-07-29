@@ -23,7 +23,7 @@ export default function Categories({ onCategoryClick }) {
 
   const onDeleteCategory = (category) => {
     deleteCategory(category);
-    setCategories(getCategories()); // Refresh categories after deletion
+    setCategories(getCategories()); 
     setSelectedCategory(null)
   };
 
@@ -33,7 +33,7 @@ export default function Categories({ onCategoryClick }) {
     } else {
       addCategory(categoryName);
     }
-    setCategories(getCategories()); // Refresh categories after adding/editing
+    setCategories(getCategories()); 
     setSelectedCategory(null);
     setIsEditing(false);
     setIsAdding(false);
@@ -52,19 +52,19 @@ export default function Categories({ onCategoryClick }) {
 
   const handleCategoryClick = (category) => {
     if (onCategoryClick) {
-      onCategoryClick(category); // Notify parent component about the clicked category
+      onCategoryClick(category); 
     }
   };
 
   const isMakeCategoryActive = isEditing || isAdding;
 
   return (
-    <div className="flex gap-2  items-center border-b-red-600 border-b-2 overflow-x-auto overflow-y-hidden h-fit">
+    <div className="flex gap-2  items-center border-b-slate-600 border-b-2 overflow-x-auto overflow-y-hidden h-fit">
       <Items
         categories={categories}
         onEditCategory={onEditCategory}
         onDeleteCategory={onDeleteCategory}
-        onCategoryClick={handleCategoryClick} // Pass the handler to Items component
+        onCategoryClick={handleCategoryClick} 
       />
       {(isEditing || isAdding) && (
         <MakeCategories
@@ -76,6 +76,7 @@ export default function Categories({ onCategoryClick }) {
 
       {!isMakeCategoryActive && (
         <AddCategories onAddCategory={handleAddCategoryClick} />
+        
       )}
     </div>
   );

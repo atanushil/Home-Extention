@@ -14,6 +14,7 @@ import News from "../../Media/news.png";
 import Translate from "../../Media/translate.png";
 import Photos from "../../Media/photos.png";
 import Youtube from "../../Media/youtube.png";
+// import 'flowbite';
 
 const imageLinks = [
   { src: Google, alt: "Google Logo", href: "https://myaccount.google.com/" },
@@ -40,15 +41,15 @@ export const Panel = () => {
       <div className="flex rounded-md flex-wrap sm:flex md:flex-row md:flex lg:flex xl:flex 2xl:flex xl:w-fit 2xl:w-fit lg:w-fit sm:w-fit md:w-full h-fit xl:flex-col lg:flex-col 2xl:justify-center lg:justify-center md:justify-center justify-between xl:justify-center items-center">
         {imageLinks.map(({ src, alt, href }, index) => (
           <a
+            key={index}
             href={href}
             target="_blank"
             rel="noopener noreferrer"
             className={`flex w-fit items-center justify-center hover:backdrop-blur-sm hover:bg-white px-2 md:px-2.5 lg:px-1 xl:px-1 2xl:px-1 ${
               index === 0 || index === imageLinks.length - 1
                 ? "py-2"
-                : "py-1 md:py-2 lg:py-0 xl:py-1 2xl:py-1.2 3xl:py-2"
+                : "py-1 md:py-2 lg:py-1 xl:py-1 2xl:py-1.2 3xl:py-2"
             }`}
-            key={index}
           >
             <img src={src} alt={alt} width={32} height={32} />
           </a>

@@ -18,7 +18,6 @@ code {
 
 
 
-
 .gsc-input {
   border: none;
   outline: none;
@@ -69,4 +68,7 @@ input {
   /* height: 40vh; */
   /* overflow-y: scroll; */
 }
-
+.gsc-control-cse{
+  background-color: none;
+  border: none;
+}

@@ -26,16 +26,16 @@ export default function ShortcutItem({
     if (option === "Edit") {
       onEdit();
     } else if (option === "Remove") {
-      onRemove(name); // Pass the name to onRemove
+      onRemove(name); 
     }
-    setShowOptions(false); // Hide options after selection
+    setShowOptions(false); 
   };
 
   const handleFaviconError = () => {
     setFaviconError(true);
   };
 
-  // Close options when clicking outside
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (optionsRef.current && !optionsRef.current.contains(event.target)) {

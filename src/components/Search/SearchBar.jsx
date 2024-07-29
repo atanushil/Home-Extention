@@ -6,7 +6,7 @@ export default function SearchBar() {
     const script = document.createElement('script');
     script.src = 'https://cse.google.com/cse.js?cx=975d312e6d6504f03';
     script.async = true;
-    
+
     // Append the script to the document head
     document.head.appendChild(script);
 
@@ -17,8 +17,8 @@ export default function SearchBar() {
   }, []);
 
   return (
-    <div className='w-full'>
-      <div className="gcse-search" ></div>
+    <div className='w-full rounded-full'>
+      <div className="gcse-search"></div>
     </div>
   );
 }

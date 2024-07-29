@@ -28,14 +28,14 @@ export default function MakeShortcut({
   const handleSubmit = (e) => {
     e.preventDefault();
     if (editShortcut) {
-      // Update the existing shortcut
+
       updateShortcut(selectedCategory, editShortcut.name, { name, link });
     } else {
-      // Add a new shortcut
+
       addShortcutToCategory(selectedCategory, { name, link });
     }
-    onShortcutChange(); // Call the function to handle the change
-    onClose(); // Close the modal
+    onShortcutChange(); 
+    onClose(); 
   };
 
   return (

@@ -59,7 +59,7 @@ export function deleteCategory(categoryName) {
   }
 }
 
-// Function to add a shortcut to an existing category
+
 // Function to add a shortcut to an existing category
 export function addShortcutToCategory(categoryName, shortcut) {
   const data = getData();
