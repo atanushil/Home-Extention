@@ -42,9 +42,9 @@ Before you begin, ensure you have met the following requirements:
     npm install
     ```
 4 **Update the config file**: Please replace your api key and search engine id 
-    i) Visit [Programmable Search Engine](https://programmablesearchengine.google.com/) for getting Search Engine Id .
-    ii) Visit  [Weather by api Ninjas](https://rapidapi.com/apininjas/api/weather-by-api-ninjas) for getting api key .
-    iii) Visit [Nominatim](https://nominatim.openstreetmap.org/ui/search.html) for get location details.(Don't need to update)
+    - **[Programmable Search Engine](https://programmablesearchengine.google.com/)** for getting Search Engine Id .
+    - **[Weather by api Ninjas](https://rapidapi.com/apininjas/api/weather-by-api-ninjas)** for getting api key .
+    - **[Nominatim](https://nominatim.openstreetmap.org/ui/search.html)** for get location details.**(Don't need to update)**
 ## Running the Application
     
 1. **Start the development server**: Use the following command to start the application:
