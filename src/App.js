@@ -31,7 +31,7 @@ export default function App() {
   const [editShortcut, setEditShortcut] = useState(null);
   const [bgColor, setBgColor] = useState("#9ca3af"); // Default background color
   const [showPicker, setShowPicker] = useState(false);
-  const [textColor, setTextColor] = useState("#FFFFFF"); // Default text color is white
+  const [textColor, setTextColor] = useState("#5c575a"); // Default text color is white
   const pickerRef = useRef(null);
 
   useEffect(() => {
