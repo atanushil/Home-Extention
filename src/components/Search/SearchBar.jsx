@@ -18,7 +18,7 @@ export default function SearchBar() {
 
   return (
     <div className='w-full rounded-full'>
-      <div className="gcse-search"></div>
+    <div className="gcse-search" id=''></div>
     </div>
   );
 }

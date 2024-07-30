@@ -20,12 +20,12 @@ export default function MakeCategories({ category, onSaveCategory, onClose }) {
 
   return (
     <div className="flex items-center w-fit rounded-full my-2">
-      <div className="input flex items-center relative">
+      <div className="input flex items-center relative caret-transparent">
         <input
           type="text"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
-          className='px-2 rounded-l-full'
+          className='px-2 rounded-l-full  focus:caret-black'
         />
         {inputValue && (
           <IoMdClose

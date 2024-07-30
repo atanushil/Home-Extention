@@ -83,7 +83,7 @@ const Weather = React.memo(({ bgColor  }) => {
 
   return (
     <div
-      className={`relative p-6 rounded-lg max-w-md shadow-md shadow-black hidden lg:block xl:block 2xl:block ${bgColor}`}
+      className={`relative p-6 rounded-lg max-w-md shadow-md shadow-black caret-transparent hidden lg:block xl:block 2xl:block ${bgColor}`}
     >
       {error && <div className="text-red-400 text-center mb-4">{error}</div>}
       {weatherData && location ? (

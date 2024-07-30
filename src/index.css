@@ -18,55 +18,53 @@ code {
 
 
 
-.gsc-input {
+/* .gsc-input {
   border: none;
   outline: none;
-}
+} */
 
 .gsc-search-button {
   display: none;
 }
 
-.gstl_50 .gssb_c {
-  /* background-color: red; */
-  border-radius: 999px;
-
-}
 
 .gsc-input-box {
   border: none;
   outline: none;
-
   border-radius: 9999px;
 }
 
-input {
+/* input {
   border: none;
   outline-offset: none;
   outline: none;
-}
+} */
 
-.gsc-input {
-
+/* .gsc-input {
   border: none;
   outline: none;
-}
+} */
 
-.gsc-results-wrapper-overlay .gsc-results-wrapper-visible {
+/* .gsc-results-wrapper-overlay .gsc-results-wrapper-visible {
   position: absolute;
   background-color: red;
   height: 40vh;
   overflow: scroll;
-}
+} */
 
-.search-bar-container {
+/* .search-bar-container {
   background-color: none;
-}
+} */
 
-#___gcse_0 :active{
+/* #___gcse_0 :active{
   background-color: none;
-  /* height: 40vh; */
-  /* overflow-y: scroll; */
+} */
+/* .gsc-control-cse{
+  background-color: none;
+  border: none;
+} */
+#___gcse_0{
+  color: none;
 }
 .gsc-control-cse{
   background-color: none;
