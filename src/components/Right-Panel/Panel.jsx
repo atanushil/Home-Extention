@@ -55,7 +55,7 @@ export const Panel = ({ setBackgroundUrl }) => {
             <img src={src} alt={alt} width={32} height={32} />
           </a>
         ))}
-        <div className="px-1 py-2">
+        <div className="px-1 py-2 sm:hidden md:hidden block">
           <FilePicker setBackgroundUrl={setBackgroundUrl} />
         </div>
       </div>
