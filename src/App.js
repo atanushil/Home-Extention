@@ -72,7 +72,7 @@ export default function App() {
 
   return (
     <div
-      className="w-full h-[100vh] flex flex-col lg:flex-row items-center bg-white/30 lg:items-stretch backdrop-blur-sm"
+      className="w-full h-[100vh] flex flex-col lg:flex-row items-center bg-slate-300 lg:items-stretch "
       style={{
         backgroundImage: backgroundDataUrl ? `url(${backgroundDataUrl})` : "none",
         backgroundSize: "cover",

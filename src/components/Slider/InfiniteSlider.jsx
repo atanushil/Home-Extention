@@ -74,7 +74,7 @@ const InfiniteSlider = () => {
   };
 
   return (
-    <div className="w-full overflow-visible  items-center backdrop-blur-sm shadow-md ">
+    <div className="w-full overflow-visible  items-center backdrop-blur-sm shadow-md bg-white/30">
       <Slider {...settings}>
         {LOGOS.map((logo, index) => (
           <a

@@ -29,7 +29,7 @@ const FilePicker = ({ setBackgroundUrl }) => {
 
   return (
     <div
-      className="relative flex items-center justify-center w-8 h-8"
+      className="relative flex items-center justify-center w-8 h-8 hover:border-2 border-white caret-transparent"
       style={{
         width: 'w-32',
         height: 'h-32',
@@ -46,7 +46,7 @@ const FilePicker = ({ setBackgroundUrl }) => {
         type="file"
         accept="image/*,video/*"
         onChange={handleFileChange}
-        className="hidden"
+        className="hidden "
         id="file-upload"
       />
     </div>

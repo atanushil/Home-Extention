@@ -41,7 +41,7 @@ const TimeDate = ({ bgColor }) => {
           {amPm ? amPm[0] : ""}
         </span>
       </p>
-      <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-center" >
+      <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-center text-white" >
         {formattedDate}
       </p>
     </div>
