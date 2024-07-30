@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import config from '../../config.js';
 
 const Weather = React.memo(({ bgColor  }) => {
   const [weatherData, setWeatherData] = useState(null);
@@ -13,7 +13,7 @@ const Weather = React.memo(({ bgColor  }) => {
       const weatherOptions = {
         method: "GET",
         headers: {
-          "x-rapidapi-key": "399e3ef61cmshfb9b26c31bd8b00p105d3ajsn639dc3a8023c", // Replace with your RapidAPI key
+          "x-rapidapi-key": config.WEATHER_API_KEY, // Replace with your RapidAPI key
           "x-rapidapi-host": "weather-by-api-ninjas.p.rapidapi.com",
         },
       };

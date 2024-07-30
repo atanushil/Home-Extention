@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-
+import config from '../../config';
 export default function SearchBar() {
   useEffect(() => {
     // Create a script element
     const script = document.createElement('script');
-    script.src = 'https://cse.google.com/cse.js?cx=975d312e6d6504f03';
+    script.src = `https://cse.google.com/cse.js?cx=${config.PROGRAMMABLE_SEARCH_ENGINE_ID}`;
     script.async = true;
 
     // Append the script to the document head
