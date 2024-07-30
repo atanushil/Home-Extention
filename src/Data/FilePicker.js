@@ -10,7 +10,7 @@ const FilePicker = ({ setBackgroundUrl }) => {
       reader.onload = () => {
         const dataUrl = reader.result;
 
-        // Log the size of the data URL in KB
+        // Log the size of the data URL in KB 
         const dataUrlSizeInKB = (dataUrl.length * (3 / 4)) / 1024;
         console.log(`Data URL size: ${dataUrlSizeInKB.toFixed(2)} KB`);
 

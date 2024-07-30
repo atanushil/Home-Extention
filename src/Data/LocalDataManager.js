@@ -206,7 +206,7 @@ function checkLocalStorageAvailableSpace() {
 }
 
 if (checkLocalStorageAvailableSpace()) {
-  console.log('Local Storage space is available for at least 1MB');
+  console.log('Local Storage space is available for at least 5MB');
 } else {
   console.log('Local Storage space may be full or unavailable');
 }
