@@ -1,19 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-const calculateContrast = (hex) => {
-  // Convert hex to RGB
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  
-  // Calculate luminance
-  const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
 
-  // Return 'black' or 'white' based on luminance
-  return luminance > 128 ? '#000000' : '#FFFFFF';
-};
 
-const TimeDate = ({ bgColor = "#f1f5f9" }) => {
+const TimeDate = ({ bgColor }) => {
   const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
@@ -41,11 +30,10 @@ const TimeDate = ({ bgColor = "#f1f5f9" }) => {
 
   const amPm = fullTime.match(/(AM|PM)$/i);
 
-  const textColor = calculateContrast(bgColor);
 
   return (
     <div className={`relative w-full hidden rounded-md backdrop-blur-sm lg:block p-4 caret-transparent shadow-lg shadow-slate-500 ${bgColor}`} >
-      <p className="flex flex-col lg:flex-row items-center rounded-sm justify-center gap-2" style={{ color: textColor }}>
+      <p className="flex flex-col lg:flex-row items-center rounded-sm justify-center gap-2 text-white" >
         <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
           {fullTime.replace(/(AM|PM)$/i, "")}
         </span>
@@ -53,7 +41,7 @@ const TimeDate = ({ bgColor = "#f1f5f9" }) => {
           {amPm ? amPm[0] : ""}
         </span>
       </p>
-      <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-center" style={{ color: textColor }}>
+      <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-center" >
         {formattedDate}
       </p>
     </div>

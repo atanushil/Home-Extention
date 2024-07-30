@@ -1,24 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const calculateContrast = (hex) => {
-  // Convert hex to RGB
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  
-  // Calculate luminance
-  const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
 
-  // Return 'black' or 'white' based on luminance
-  return luminance > 128 ? '#000000' : '#FFFFFF';
-};
-
-const Weather = React.memo(({ bgColor = "#cbd5e1" }) => {
+const Weather = React.memo(({ bgColor  }) => {
   const [weatherData, setWeatherData] = useState(null);
   const [location, setLocation] = useState(null);
   const [error, setError] = useState(null);
-  const [textColor, setTextColor] = useState("#FFFFFF"); 
 
   useEffect(() => {
     const fetchWeather = async (lat, lon) => {
@@ -78,10 +65,6 @@ const Weather = React.memo(({ bgColor = "#cbd5e1" }) => {
     getLocation();
   }, []);
 
-  useEffect(() => {
-    // Update text color based on background color
-    setTextColor(calculateContrast(bgColor));
-  }, [bgColor]);
 
   const getWeatherIcon = (temp) => {
     const currentHour = new Date().getHours();
@@ -104,7 +87,7 @@ const Weather = React.memo(({ bgColor = "#cbd5e1" }) => {
     >
       {error && <div className="text-red-400 text-center mb-4">{error}</div>}
       {weatherData && location ? (
-        <div className="text-center" style={{ color: textColor }}>
+        <div className="text-center text-white">
           <h3 className="text-2xl font-bold mb-2">
             Weather in {location.city || location.town || location.village}
           </h3>
