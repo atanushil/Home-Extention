@@ -74,7 +74,7 @@ const InfiniteSlider = () => {
   };
 
   return (
-    <div className="w-full overflow-visible  items-center">
+    <div className="w-full overflow-visible  items-center backdrop-blur-sm shadow-md ">
       <Slider {...settings}>
         {LOGOS.map((logo, index) => (
           <a
@@ -82,7 +82,7 @@ const InfiniteSlider = () => {
             href={logo.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex justify-center items-center px-2 py-4 hover:bg-slate-300"
+            className="flex justify-center items-center px-2 py-4 hover:bg-slate-400"
           >
             <FontAwesomeIcon
               icon={logo.icon}

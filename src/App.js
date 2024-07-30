@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Weather from "./components/Weather/Weather";
 import TimeDate from "./components/TimeDate/TimeDate";
 import SearchBar from "./components/Search/SearchBar";
@@ -9,18 +9,13 @@ import { getCategories, getShortcuts } from "./Data/LocalDataManager";
 import { Panel } from "./components/Right-Panel/Panel";
 import "./index.css";
 import InfiniteSlider from "./components/Slider/InfiniteSlider";
-import { ChromePicker } from "react-color";
-
-
 
 export default function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [shortcuts, setShortcuts] = useState([]);
   const [showShortcutModal, setShowShortcutModal] = useState(false);
   const [editShortcut, setEditShortcut] = useState(null);
-  const [bgColor, setBgColor] = useState("#9ca3af"); // Default background color
-  const [showPicker, setShowPicker] = useState(false);
-  const pickerRef = useRef(null);
+  const [backgroundDataUrl, setBackgroundDataUrl] = useState("");
 
   useEffect(() => {
     const categories = getCategories();
@@ -29,7 +24,7 @@ export default function App() {
     }
   }, []);
 
-  useEffect(() => {
+  const fetchShortcuts = useCallback(() => {
     if (selectedCategory) {
       const fetchedShortcuts = getShortcuts(selectedCategory);
       setShortcuts(fetchedShortcuts);
@@ -38,16 +33,17 @@ export default function App() {
     }
   }, [selectedCategory]);
 
+  useEffect(() => {
+    fetchShortcuts();
+  }, [fetchShortcuts]);
+
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
   };
 
   const handleShortcutChange = useCallback(() => {
-    if (selectedCategory) {
-      const fetchedShortcuts = getShortcuts(selectedCategory);
-      setShortcuts(fetchedShortcuts);
-    }
-  }, [selectedCategory]);
+    fetchShortcuts();
+  }, [fetchShortcuts]);
 
   const handleCloseModal = () => {
     setEditShortcut(null);
@@ -56,32 +52,36 @@ export default function App() {
 
   useEffect(() => {
     const intervalId = setInterval(handleShortcutChange, 1000);
-
     return () => clearInterval(intervalId);
   }, [handleShortcutChange]);
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (pickerRef.current && !pickerRef.current.contains(event.target)) {
-        setShowPicker(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    // Load the background data URL from local storage on mount
+    const storedBackgroundDataUrl = localStorage.getItem("backgroundDataUrl");
+    if (storedBackgroundDataUrl) {
+      setBackgroundDataUrl(storedBackgroundDataUrl);
+    }
   }, []);
+
+  const handleFileUpload = (dataUrl) => {
+    // Store the data URL in local storage
+    localStorage.setItem("backgroundDataUrl", dataUrl);
+    // Update the background data URL state
+    setBackgroundDataUrl(dataUrl);
+  };
 
   return (
     <div
-      className="w-full h-[100vh] flex flex-col lg:flex-row items-center lg:items-stretch backdrop-brightness-50"
-      style={{ backgroundColor: bgColor }}
+      className="w-full h-[100vh] flex flex-col lg:flex-row items-center bg-white/30 lg:items-stretch backdrop-blur-sm"
+      style={{
+        backgroundImage: backgroundDataUrl ? `url(${backgroundDataUrl})` : "none",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
     >
-      <section className="w-10/12 md:w-10/12 lg:w-1/4 xl:w-1/5 h-fit mx-8 my-2 flex rounded-md flex-col gap-3 sm:mt-2 md:mt-4 lg:mt-8 xl:mt-8 2xl:mt-8">
-        <TimeDate />
-        <Weather />
+      <section className="w-10/12 md:w-10/12 lg:w-1/4 xl:w-1/5 z-0 h-fit mx-8 my-2 flex rounded-md flex-col gap-3 sm:mt-2 md:mt-4 lg:mt-8 xl:mt-8 2xl:mt-8">
+        <TimeDate bgColor="bg-white/30" />
+        <Weather bgColor="bg-white/30" />
         <InfiniteSlider />
       </section>
       <main className="lg:w-9/12 xl:min-w-4/5 2xl:w-9/12 w-10/12 lg:h-3/5 sm:h-3/5 md:h-3/5 my-0 sm:my-8 overflow-auto flex flex-col items-center">
@@ -91,20 +91,18 @@ export default function App() {
         <div className="my-2 flex flex-col gap-2 overflow-x-auto overflow-y-hidden h-fit w-full">
           <Categories onCategoryClick={handleCategoryClick} />
           {selectedCategory && (
-            <>
-              <Shortcuts
-                shortcuts={shortcuts}
-                selectedCategory={selectedCategory}
-                setEditShortcut={setEditShortcut}
-                setIsMakeShortcutOpen={setShowShortcutModal}
-                onShortcutChange={handleShortcutChange}
-              />
-            </>
+            <Shortcuts
+              shortcuts={shortcuts}
+              selectedCategory={selectedCategory}
+              setEditShortcut={setEditShortcut}
+              setIsMakeShortcutOpen={setShowShortcutModal}
+              onShortcutChange={handleShortcutChange}
+            />
           )}
         </div>
       </main>
       <section className="mt-8 px-2">
-        <Panel />
+        <Panel setBackgroundUrl={handleFileUpload} />
       </section>
 
       {showShortcutModal && (
@@ -117,24 +115,6 @@ export default function App() {
           onShortcutChange={handleShortcutChange}
         />
       )}
-
-      <div className="absolute top-0 right-0 ">
-        <button
-          onClick={() => setShowPicker(!showPicker)}
-          className="h-[3vh] w-[3vw] rounded-sm border-2 border-black"
-          style={{ backgroundColor: bgColor }}
-        >
-          {/* Button to toggle the color picker */}
-        </button>
-        {showPicker && (
-          <div className="absolute top-8 right-0" ref={pickerRef}>
-            <ChromePicker
-              color={bgColor}
-              onChangeComplete={(color) => setBgColor(color.hex)}
-            />
-          </div>
-        )}
-      </div>
     </div>
   );
 }

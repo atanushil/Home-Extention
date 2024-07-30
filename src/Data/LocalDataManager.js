@@ -171,3 +171,42 @@ export function getShortcuts(categoryName) {
     localStorage.setItem('categoryData', JSON.stringify({ categories: [] }));
   }
 })();
+
+
+function estimateLocalStorageUsage() {
+  let totalSize = 0;
+
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key) {
+      const value = localStorage.getItem(key);
+      totalSize += key.length + value.length;
+    }
+  }
+
+  // Convert size to KB (1 character = 1 byte)
+  const sizeInKB = totalSize / 1024;
+
+  return sizeInKB;
+}
+
+console.log(`Local Storage usage: ${estimateLocalStorageUsage().toFixed(2)} KB`);
+
+function checkLocalStorageAvailableSpace() {
+  const testKey = 'test';
+  const testValue = new Array(1024 * 1024).join('a'); // 1MB
+
+  try {
+    localStorage.setItem(testKey, testValue);
+    localStorage.removeItem(testKey);
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+if (checkLocalStorageAvailableSpace()) {
+  console.log('Local Storage space is available for at least 1MB');
+} else {
+  console.log('Local Storage space may be full or unavailable');
+}

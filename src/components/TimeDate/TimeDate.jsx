@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
-import { ChromePicker } from "react-color";
+import React, { useState, useEffect } from "react";
 
 const calculateContrast = (hex) => {
   // Convert hex to RGB
@@ -14,11 +13,8 @@ const calculateContrast = (hex) => {
   return luminance > 128 ? '#000000' : '#FFFFFF';
 };
 
-export default function TimeDate() {
+const TimeDate = ({ bgColor = "#f1f5f9" }) => {
   const [currentTime, setCurrentTime] = useState(new Date());
-  const [bgColor, setBgColor] = useState("#C3B7B7"); // Default background color
-  const [showPicker, setShowPicker] = useState(false); 
-  const pickerRef = useRef(null); 
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -26,22 +22,6 @@ export default function TimeDate() {
     }, 1000); 
 
     return () => clearInterval(intervalId); 
-  }, []);
-
-  useEffect(() => {
-
-    const handleClickOutside = (event) => {
-      if (pickerRef.current && !pickerRef.current.contains(event.target)) {
-        setShowPicker(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
   }, []);
 
   const dateOptions = {
@@ -59,14 +39,12 @@ export default function TimeDate() {
   const formattedDate = currentTime.toLocaleDateString(undefined, dateOptions);
   const fullTime = currentTime.toLocaleTimeString(undefined, timeOptions);
 
-
   const amPm = fullTime.match(/(AM|PM)$/i);
-
 
   const textColor = calculateContrast(bgColor);
 
   return (
-    <div className="relative w-full hidden rounded-md backdrop-blur-sm lg:block p-4 caret-transparent" style={{ backgroundColor: bgColor }}>
+    <div className={`relative w-full hidden rounded-md backdrop-blur-sm lg:block p-4 caret-transparent shadow-lg shadow-slate-500 ${bgColor}`} >
       <p className="flex flex-col lg:flex-row items-center rounded-sm justify-center gap-2" style={{ color: textColor }}>
         <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
           {fullTime.replace(/(AM|PM)$/i, "")}
@@ -78,26 +56,8 @@ export default function TimeDate() {
       <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-center" style={{ color: textColor }}>
         {formattedDate}
       </p>
-      <div className="absolute top-0 right-0 mt-2 mr-2">
-        <button
-          onClick={() => setShowPicker(!showPicker)}
-          className="h-4 w-6 bg-gray-300 rounded-md border"
-          style={{ backgroundColor: bgColor }}
-        >
-          {/* Button to toggle the color picker */}
-        </button>
-        {showPicker && (
-          <div
-            className="absolute top-8 right-0"
-            ref={pickerRef} 
-          >
-            <ChromePicker
-              color={bgColor}
-              onChangeComplete={(color) => setBgColor(color.hex)}
-            />
-          </div>
-        )}
-      </div>
     </div>
   );
 }
+
+export default TimeDate;

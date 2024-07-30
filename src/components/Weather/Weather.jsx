@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { ChromePicker } from "react-color";
 
 const calculateContrast = (hex) => {
   // Convert hex to RGB
@@ -15,14 +14,11 @@ const calculateContrast = (hex) => {
   return luminance > 128 ? '#000000' : '#FFFFFF';
 };
 
-const Weather = React.memo(() => {
+const Weather = React.memo(({ bgColor = "#cbd5e1" }) => {
   const [weatherData, setWeatherData] = useState(null);
   const [location, setLocation] = useState(null);
   const [error, setError] = useState(null);
-  const [bgColor, setBgColor] = useState("#4A90E2"); // Default background color
-  const [showPicker, setShowPicker] = useState(false); // To toggle the color picker visibility
-  const [textColor, setTextColor] = useState("#FFFFFF"); // Default text color is white
-  const pickerRef = useRef(null); // Ref to store color picker element
+  const [textColor, setTextColor] = useState("#FFFFFF"); 
 
   useEffect(() => {
     const fetchWeather = async (lat, lon) => {
@@ -83,23 +79,6 @@ const Weather = React.memo(() => {
   }, []);
 
   useEffect(() => {
-    // Function to handle clicks outside the color picker
-    const handleClickOutside = (event) => {
-      if (pickerRef.current && !pickerRef.current.contains(event.target)) {
-        setShowPicker(false);
-      }
-    };
-
-    // Add event listener
-    document.addEventListener('mousedown', handleClickOutside);
-
-    // Cleanup event listener
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
-
-  useEffect(() => {
     // Update text color based on background color
     setTextColor(calculateContrast(bgColor));
   }, [bgColor]);
@@ -121,8 +100,7 @@ const Weather = React.memo(() => {
 
   return (
     <div
-      className="relative p-6 rounded-lg max-w-md shadow-lg hidden lg:block xl:block 2xl:block"
-      style={{ backgroundColor: bgColor }}
+      className={`relative p-6 rounded-lg max-w-md shadow-md shadow-black hidden lg:block xl:block 2xl:block ${bgColor}`}
     >
       {error && <div className="text-red-400 text-center mb-4">{error}</div>}
       {weatherData && location ? (
@@ -147,26 +125,6 @@ const Weather = React.memo(() => {
       ) : (
         !error && <div className="text-center text-white">Loading weather data...</div>
       )}
-      <div className="absolute top-0 right-0 mt-2 mr-2">
-        <button
-          onClick={() => setShowPicker(!showPicker)}
-          className="h-4 w-6 bg-gray-300 rounded-md border"
-          style={{ backgroundColor: bgColor }}
-        >
-          {/* Button to toggle the color picker */}
-        </button>
-        {showPicker && (
-          <div
-            className="absolute top-8 right-0"
-            ref={pickerRef} 
-          >
-            <ChromePicker
-              color={bgColor}
-              onChangeComplete={(color) => setBgColor(color.hex)}
-            />
-          </div>
-        )}
-      </div>
     </div>
   );
 });
