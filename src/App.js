@@ -80,8 +80,8 @@ export default function App() {
       }}
     >
       <section className="w-10/12 md:w-10/12 lg:w-1/4 xl:w-1/5 z-0 h-fit mx-8 my-2 flex rounded-md flex-col gap-3 sm:mt-2 md:mt-4 lg:mt-8 xl:mt-8 2xl:mt-8">
-        // <TimeDate bgColor="bg-white/30" />
-        // <Weather bgColor="bg-white/30" />
+
+       
         <InfiniteSlider />
       </section>
       <main className="lg:w-9/12 xl:min-w-4/5 2xl:w-9/12 w-10/12 lg:h-3/5 sm:h-3/5 md:h-3/5 my-0 sm:my-8 overflow-auto flex flex-col items-center">
