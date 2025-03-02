@@ -101,9 +101,7 @@ export default function App() {
           )}
         </div>
       </main>
-      <section className="mt-8 px-2">
-        <Panel setBackgroundUrl={handleFileUpload} />
-      </section>
+    
 
       {showShortcutModal && (
         <MakeShortcut
